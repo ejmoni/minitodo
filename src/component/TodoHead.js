@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import App from "../App.js";
 
 const TodoHeadBlock =  styled.div`
     padding-top: 48px;
@@ -18,23 +17,34 @@ const TodoHeadBlock =  styled.div`
         color: #868e96;
         font-size: 21px;
     }
-    .tasks-left{
+    /* .tasks-left{
         color: #20c997;
         font-size: 18px;
         margin-top: 40px;
-        font-size: bold;
-    }
+        font-weight: bold;
+    } */
 
 `;
 
 function TodoHead() {
+    // const todos = useTodoState();
+    // const undoneTasks = todo.filter(todo => !todo.done);
+    const today = new Date();
+    const dateString = today.toLocaleDateString('ko-KR', {
+        year: 'numeric', 
+        month: 'long',
+        day:'numeric'
+    });
+    const dayday = today.toLocaleDateString('ko-KR',{weekday:'long'})
+
   return (
-    <TodoHead>
-        <h1>2022년 8월 17일</h1>
-        <div className='day'>수요일</div>
-        <div className='task-left'>할 일 2개 남음</div>
-    </TodoHead>
+    <TodoHeadBlock>
+        <h1>{dateString}</h1>
+        <div className='day'>{dayday}</div>
+        {/* <div className='task-left'>할 일 2개 남음</div>  */}
+        {/* 오늘날짜나오게 바꾸기 */}
+    </TodoHeadBlock>
   );
 }
 
-export default TodoHead
+export default TodoHead;

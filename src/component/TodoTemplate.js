@@ -1,6 +1,5 @@
 import React from "react";
-import styled, {createGlobalStyle} from 'styled-components';
-import App from "../App.js";
+import styled from 'styled-components';
 
 const TodoTemplateBlock = styled.div`
     width: 512px;
