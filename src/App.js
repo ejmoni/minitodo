@@ -4,6 +4,7 @@ import TodoTemplate from "./component/TodoTemplate";
 import TodoHead from "./component/TodoHead";
 import TodoList from "./component/TodoList";
 import TodoCreate from "./component/TodoCreate";
+import { useState } from "react";
 
 const Globalstyle = createGlobalStyle`
   body{
@@ -13,13 +14,15 @@ const Globalstyle = createGlobalStyle`
 
 function App() {
   // 변수=fetch() 데이터가담김
+  const [todos, setTodos] = useState();
   
-  return ( 
+
+  return (
     <>
       <Globalstyle />
       <TodoTemplate>
         <TodoHead />
-        <TodoList />
+        <TodoList todos={todos} />
         <TodoCreate />
       </TodoTemplate>
     </>

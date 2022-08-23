@@ -46,7 +46,7 @@ const CircleButton = styled.button`
   align-items: center;
   justify-content: center;
 
-  ${props =>
+  ${(props) =>
     props.open &&
     css`
       background: #c6eb34;
@@ -83,23 +83,40 @@ const Input = styled.input`
   box-sizing: border-box;
 `;
 
-function TodoCreate() {
+function TodoCreate(props) {
   const [open, setOpen] = useState(false);
   const onToggle = () => setOpen(!open);
+  const [title, setTitle] = useState("");
+  const [value, setValue] = useState("");
 
+  let tododo = { title: value };
+  const onChange = (e) => setValue(e.target.value);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    fetch("http://localhost:3001/todo", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(tododo),
+    }).then(() => window.location.reload());
+    setValue("");
+  };
   return (
     <>
-    {/* {변수.map(el=>{return <div>{el.title}</div>})} */}
+      {/* {변수.map(el=>{return <div>{el.title}</div>})} */}
       <Sticker />
       {open && (
         <InsertFormPositioner>
-          <InsertForm>
-            <Input placeholder="할 일을 입력후, enter를 누르세요" />
+          <InsertForm onSubmit={onSubmit}>
+            <Input
+              placeholder="할 일을 입력후, enter를 누르세요"
+              onChange={onChange}
+              value={value}
+            />
           </InsertForm>
         </InsertFormPositioner>
       )}
       <CircleButton onClick={onToggle} open={open}>
-        <MdAdd/> 
+        <MdAdd />
       </CircleButton>
     </>
   );
